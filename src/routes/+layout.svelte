@@ -29,8 +29,8 @@
 		content="A quick and open-source attempt to build the game of life in Svelte"
 	/>
 
-	<meta property="twitter:image" content="/share.png" />
-	<meta property="og:image" content="/share.png" />
+	<meta property="twitter:image" content="https://life.jovianmoon.io/share.png" />
+	<meta property="og:image" content="https://life.jovianmoon.io/share.png" />
 </svelte:head>
 
 <Header />
