@@ -3,7 +3,6 @@
 	import { show_rulers } from './settings';
 	import { onMount } from 'svelte';
 	import Cell from './Cell.svelte';
-	import { dev } from '$app/environment';
 	import Rulers from './Rulers.svelte';
 
 	// setup our grid
@@ -11,17 +10,17 @@
 		// we are drawing this with css grid
 		// draw order: rows, then columns
 		let array = new Array($grid.rows);
-		for (let i = 0; i < $grid.columns; i++) {
-			array[i] = new Array($grid.columns);
+		for (let column = 0; column < $grid.columns; column++) {
+			array[column] = new Array($grid.columns);
 		}
 
 		// set store with initialized game state
 		game.set(array);
 
 		// now we can manipulate the state of each cell
-		for (let r = 0; r < $grid.rows; r++) {
-			for (let c = 0; c < $grid.columns; c++) {
-				$game[r][c] = 0;
+		for (let row = 0; row < $grid.rows; row++) {
+			for (let column = 0; column < $grid.columns; column++) {
+				$game[row][column] = 0;
 			}
 		}
 	});

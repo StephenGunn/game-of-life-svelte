@@ -2,8 +2,6 @@
 	import { cell_size, game } from '$lib/game/data';
 	import { show_coords, is_draw } from '$lib/game/settings';
 
-	// r == row index
-	// c == column index
 	export let row: number = 0;
 	export let column: number = 0;
 	export let mouse_down: boolean = false;
@@ -11,10 +9,10 @@
 	// I use a <button> here to make ARIA happy
 	// what do we say to the god of accessiblity warnings? "yes ma'am"
 
-	// responsive helper, does this cell still exist on the game board?
+	// does this cell still exist on the game board?
 	$: available = ($game ?? []).length > row || ($game[column] ?? []).length > column;
 
-	// celular atomata in svelte :)
+	// celular atomata
 	$: alive = available && $game[row] && $game[row][column] && $game[row][column] === 1 ? 1 : 0;
 
 	const handle_toggle = () => {
