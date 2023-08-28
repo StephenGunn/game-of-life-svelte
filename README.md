@@ -18,5 +18,6 @@ A few of my goals:
 *   A fluid game board / clean responsive design
 *   Has to run well enough
 *   No type-os on this page (it's late)
+*   Didn't want to use canvas or any rendering libraries
 
-If you like my effort, give me a star on [GitHub](https://github.com/StephenGunn/game-of-life-svelte) :)
+If you like my effort, give me a star :)
