@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { container, grid, cell_size, game } from '$lib/game/data';
+	import { container, grid, cell_size, game, game_loaded } from '$lib/game/data';
 	import { show_rulers } from './settings';
 	import { onMount } from 'svelte';
 	import Cell from './Cell.svelte';
@@ -23,6 +23,8 @@
 				$game[row][column] = 0;
 			}
 		}
+
+		game_loaded.set(true);
 	});
 
 	// let's track if we click and drag so we can draw, this is updated in markup
@@ -30,7 +32,7 @@
 </script>
 
 <div class="container" bind:offsetWidth={$container.w} bind:offsetHeight={$container.h}>
-	{#if $game}
+	{#if $game_loaded}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
 		<div
 			class="grid"
@@ -46,6 +48,8 @@
 				{/each}
 			{/each}
 		</div>
+	{:else}
+		<div class="loading">Generating game board...</div>
 	{/if}
 	{#if $show_rulers}
 		<Rulers />
@@ -63,5 +67,13 @@
 		position: absolute;
 		display: grid;
 		border: 1px solid var(--accent);
+	}
+
+	.loading {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		place-content: center;
+		font-size: 2rem;
 	}
 </style>

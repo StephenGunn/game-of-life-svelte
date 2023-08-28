@@ -13,7 +13,7 @@
 	$: available = ($game ?? []).length > row || ($game[column] ?? []).length > column;
 
 	// celular atomata
-	$: alive = available && $game[row] && $game[row][column] && $game[row][column] === 1 ? 1 : 0;
+	$: alive = available && $game[row] && $game[row][column] && $game[row][column] === 1;
 
 	const handle_toggle = () => {
 		// double check to see if we're setting a value that exists in the game state
@@ -36,8 +36,7 @@
 	class:alive
 	style:width="{$cell_size}px"
 	style:height="{$cell_size}px"
-	on:mouseover={handle_mouseenter}
-	on:focus={handle_toggle}
+	on:mouseenter={handle_mouseenter}
 	on:mousedown={handle_toggle}
 >
 	{#if $show_coords}

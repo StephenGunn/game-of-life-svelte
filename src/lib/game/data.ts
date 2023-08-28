@@ -1,6 +1,8 @@
 // game data, try to avoid complex data for performance concerns
 import { writable, type Writable, derived } from "svelte/store";
 
+export const game_loaded = writable(false)
+
 // board size in pixels so we can calculate how many cells to inti the game with
 export const container = writable({
     w: 0,
