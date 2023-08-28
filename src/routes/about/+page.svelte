@@ -20,7 +20,7 @@
 			<li>Make it interactive (you can draw on the game board to change the state live!)</li>
 			<li>A fluid game board / clean responsive design</li>
 			<li>Has to run well enough</li>
-			<li>Didn't want to use canvas or any rendering libraries</li>
+			<li>Use the DOM to render the game to try and push Svelte a bit</li>
 			<li>No type-os on this page (it's late)</li>
 		</ul>
 		<p>
