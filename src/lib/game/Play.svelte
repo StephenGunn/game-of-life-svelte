@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { grid, game, currently_alive, generation } from './data';
-	import { is_currently_playing } from './settings';
+	import { is_currently_playing, is_fast } from './settings';
 
 	const count_neighbors = (x: number, y: number) => {
 		// we are using another set of nested loops to count all of our neighbors and subtract the
@@ -20,12 +20,23 @@
 		sum -= $game[x][y];
 		return sum;
 	};
+
+	let game_loop: ReturnType<typeof setInterval>;
 	const next_step = () => {
 		// if nothing is left, stop the game before we loop through everything.
 		if ($currently_alive === 0) {
 			$is_currently_playing = false;
+			clearInterval(game_loop);
 		}
 
+		// init our next frame
+		let next: (0 | 1)[][];
+		next = new Array($grid.columns);
+		for (let i = 0; i < $grid.columns; i++) {
+			next[i] = new Array($grid.rows);
+		}
+
+		// count our generation
 		$generation += 1;
 
 		// iterate through our game
@@ -35,18 +46,21 @@
 				let state = $game[i][j];
 				const neighbors = count_neighbors(i, j);
 				if (state === 0 && neighbors === 3) {
-					$game[i][j] = 1;
+					next[i][j] = 1;
 				} else if (state === 1 && (neighbors < 2 || neighbors > 3)) {
-					$game[i][j] = 0;
+					next[i][j] = 0;
 				} else {
-					$game[i][j] = state;
+					next[i][j] = state;
 				}
 			}
 		}
+
+		console.table(next);
+
+		$game = next;
 	};
 
-	let game_loop: ReturnType<typeof setInterval>;
-	const play_toggle = () => {
+	export const play_toggle = () => {
 		// stop logic
 		if ($is_currently_playing) {
 			$is_currently_playing = false;
@@ -57,9 +71,12 @@
 		// play logic
 		$is_currently_playing = true;
 		next_step();
-		game_loop = setInterval(() => {
-			next_step();
-		}, 100);
+		game_loop = setInterval(
+			() => {
+				next_step();
+			},
+			$is_fast ? 100 : 500
+		);
 	};
 </script>
 

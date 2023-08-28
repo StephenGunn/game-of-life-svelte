@@ -57,7 +57,7 @@
 
 	.alive {
 		background: var(--primary);
-		border: 1px solid var(--primary);
+		/* border: 1px solid var(--primary); */
 		color: black;
 	}
 </style>

@@ -1,17 +1,20 @@
 <script lang="ts">
-	import { show_coords, show_rulers } from '$lib/game/settings';
+	import { show_coords, show_rulers, is_fast, is_currently_playing } from '$lib/game/settings';
 	import { grid, currently_alive, generation } from '$lib/game/data';
 	import Play from '$lib/game/Play.svelte';
 	import Randomize from '$lib/game/Randomize.svelte';
 	import Resize from '$lib/game/Resize.svelte';
 	import Toggle from './Toggle.svelte';
+	import type { SvelteComponent } from 'svelte';
+
+	let player: SvelteComponent;
 </script>
 
 <aside>
 	<div class="controls">
 		<div class="item">
 			<div class="title">Game Controls</div>
-			<Play />
+			<Play bind:this={player} />
 		</div>
 		<div class="item">
 			<div class="title">Data</div>
@@ -31,6 +34,23 @@
 				<div>dead</div>
 				<div>{$grid.columns * $grid.rows - $currently_alive}</div>
 			</div>
+		</div>
+		<div class="item">
+			<div class="title">Speed</div>
+			<Toggle
+				on:switch={() => {
+					$is_fast = !$is_fast;
+					if ($is_currently_playing) {
+						// start and stop to reset the interval
+						player.play_toggle();
+						player.play_toggle();
+					}
+				}}
+				value={$is_fast}
+			>
+				<svelte:fragment slot="true">Fast</svelte:fragment>
+				<svelte:fragment slot="false">Slow</svelte:fragment>
+			</Toggle>
 		</div>
 		<div class="item">
 			<div class="title">Cell Size</div>

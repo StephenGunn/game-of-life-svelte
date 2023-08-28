@@ -8,8 +8,8 @@ export const container = writable({
 })
 
 // cell size in pixels
-export const cell_size = writable(50)
-export const cell_min_size = writable(50)
+export const cell_size = writable(20)
+export const cell_min_size = writable(20)
 
 // derived store calculates our grid
 export const grid = derived(
