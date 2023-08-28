@@ -107,14 +107,14 @@ aside button {
     align-items: center;
     justify-content: center;
     min-height: 2rem;
-    gap: 1rem;
+    gap: .5rem;
     border-radius: .5rem;
     font-size: .8rem;
 }
 
 aside button svg {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: .75rem;
+    height: .75rem;
 }
 
 aside button:hover {

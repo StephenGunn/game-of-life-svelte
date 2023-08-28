@@ -36,10 +36,11 @@ export const currently_alive = derived(
     [game, grid],
     ([$game, $grid]) => {
         let alive = 0
-        if(!$game || !$game.length) return alive
-        for (let x = 0; x < $grid.columns; x++) {
-            for (let y = 0; y < $grid.rows; y++) {
-                if($game[x][y] === 1) alive++
+        if (!$game || !$game.length) return alive
+        // follow the same draw order, row -> column
+        for (let row = 0; row < $grid.rows; row++) {
+            for (let column = 0; column < $grid.columns; column++) {
+                if($game[row][column] === 1) alive++
             }
         }
         return alive

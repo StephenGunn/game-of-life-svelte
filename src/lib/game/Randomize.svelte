@@ -1,17 +1,29 @@
 <script lang="ts">
 	import { game, grid } from './data';
+
+	let button: HTMLButtonElement;
 	const set_random = () => {
 		// we only want a 20% chance of the cell to be alive
-		// or too many cells happen and everything dies :(
-		for (let i = 0; i < $grid.rows; i++) {
-			for (let j = 0; j < $grid.columns; j++) {
-				$game[i][j] = Math.random() < 0.8 ? 0 : 1;
+		// or too many cells happen and everything dies too fast :(
+		// create our randomized board in fresh var in row -> column standard
+		let randomized_game: (0 | 1)[][];
+		randomized_game = new Array($grid.rows);
+		for (let row = 0; row < $grid.rows; row++) {
+			randomized_game[row] = new Array($grid.columns);
+		}
+
+		for (let row = 0; row < $grid.rows; row++) {
+			for (let column = 0; column < $grid.columns; column++) {
+				randomized_game[row][column] = Math.random() < 0.8 ? 0 : 1;
 			}
 		}
+
+		// finalize the random
+		$game = randomized_game;
 	};
 </script>
 
-<button on:click={set_random}>
+<button on:click={set_random} bind:this={button}>
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
 		><rect width="256" height="256" fill="none" /><path
 			d="M32,72H55.06a64,64,0,0,1,52.08,26.8l41.72,58.4A64,64,0,0,0,200.94,184H232"
@@ -51,3 +63,10 @@
 		/></svg
 	> Randomize Cells
 </button>
+
+<style>
+	button svg {
+		width: 1.1rem;
+		height: 1.1rem;
+	}
+</style>

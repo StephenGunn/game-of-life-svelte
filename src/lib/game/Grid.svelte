@@ -8,18 +8,20 @@
 
 	// we need to init our blank grid on mount
 	onMount(() => {
-		let array = new Array($grid.columns);
+		// we are drawing this with css grid
+		// draw order: rows, then columns
+		let array = new Array($grid.rows);
 		for (let i = 0; i < $grid.columns; i++) {
-			array[i] = new Array($grid.rows);
+			array[i] = new Array($grid.columns);
 		}
 
 		// init empty array
 		game.set(array);
 
 		// now we can manipulate the state of each cell
-		for (let c = 0; c < $grid.columns; c++) {
-			for (let r = 0; r < $grid.rows; r++) {
-				$game[c][r] = 0;
+		for (let r = 0; r < $grid.rows; r++) {
+			for (let c = 0; c < $grid.columns; c++) {
+				$game[r][c] = 0;
 			}
 		}
 
@@ -58,9 +60,9 @@
                 i could wrap the columns in a sub div and stack the cells inside but
                 i think leaving it like this will be easier for the browser to render
             -->
-			{#each { length: $grid.rows } as _, x}
-				{#each { length: $grid.columns } as _, y}
-					<Cell {x} {y} {mouse_down} />
+			{#each { length: $grid.rows } as _, row}
+				{#each { length: $grid.columns } as _, column}
+					<Cell {row} {column} {mouse_down} />
 				{/each}
 			{/each}
 		</div>

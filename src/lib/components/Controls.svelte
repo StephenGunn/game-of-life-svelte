@@ -6,6 +6,7 @@
 	import Resize from '$lib/game/Resize.svelte';
 	import Toggle from './Toggle.svelte';
 	import type { SvelteComponent } from 'svelte';
+	import Reset from '$lib/game/Reset.svelte';
 
 	let player: SvelteComponent;
 </script>
@@ -13,11 +14,9 @@
 <aside>
 	<div class="controls">
 		<div class="item">
-			<div class="title">Game Controls</div>
 			<Play bind:this={player} />
 		</div>
 		<div class="item">
-			<div class="title">Data</div>
 			<div class="spread">
 				<div>generation</div>
 				<div>{$generation}</div>
@@ -36,7 +35,22 @@
 			</div>
 		</div>
 		<div class="item">
-			<div class="title">Speed</div>
+			<div class="title">Grid</div>
+			<div class="spread">
+				<div>columns</div>
+				<div>{$grid.columns}</div>
+			</div>
+			<div class="spread">
+				<div>rows</div>
+				<div>{$grid.rows}</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="title">Cell Size</div>
+			<Resize />
+		</div>
+		<div class="item">
+			<div class="title">Generation Speed</div>
 			<Toggle
 				on:switch={() => {
 					$is_fast = !$is_fast;
@@ -52,32 +66,23 @@
 				<svelte:fragment slot="false">Slow</svelte:fragment>
 			</Toggle>
 		</div>
+
 		<div class="item">
-			<div class="title">Cell Size</div>
-			<Resize />
+			<div class="title">Show Rulers</div>
+			<Toggle on:switch={() => ($show_rulers = !$show_rulers)} value={$show_rulers} />
+		</div>
+
+		<div class="item">
+			<div class="title">Show Coords</div>
+			<Toggle on:switch={() => ($show_coords = !$show_coords)} value={$show_coords} />
 		</div>
 		<div class="item">
 			<div class="title">Randomize</div>
 			<Randomize />
 		</div>
 		<div class="item">
-			<div class="title">Show Rulers</div>
-			<Toggle on:switch={() => ($show_rulers = !$show_rulers)} value={$show_rulers} />
-		</div>
-		<div class="item">
-			<div class="title">Grid</div>
-			<div class="spread">
-				<div>columns</div>
-				<div>{$grid.columns}</div>
-			</div>
-			<div class="spread">
-				<div>rows</div>
-				<div>{$grid.rows}</div>
-			</div>
-		</div>
-		<div class="item">
-			<div class="title">Show Coords</div>
-			<Toggle on:switch={() => ($show_coords = !$show_coords)} value={$show_coords} />
+			<div class="title">Reset Game</div>
+			<Reset />
 		</div>
 	</div>
 </aside>
