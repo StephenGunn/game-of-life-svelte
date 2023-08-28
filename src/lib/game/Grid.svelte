@@ -6,7 +6,7 @@
 	import { dev } from '$app/environment';
 	import Rulers from './Rulers.svelte';
 
-	// we need to init our blank grid on mount
+	// setup our grid
 	onMount(() => {
 		// we are drawing this with css grid
 		// draw order: rows, then columns
@@ -15,7 +15,7 @@
 			array[i] = new Array($grid.columns);
 		}
 
-		// init empty array
+		// set store with initialized game state
 		game.set(array);
 
 		// now we can manipulate the state of each cell
@@ -24,21 +24,7 @@
 				$game[r][c] = 0;
 			}
 		}
-
-		// we need to trim the game array after resize to remove hidden cells
-		// maybe, i will leave this here until after i get the game logic working
-		let timeout: ReturnType<typeof setTimeout>;
-		const debounced_resize = () => {
-			clearTimeout(timeout);
-			timeout = setTimeout(() => {
-				console.log('resize detected');
-			}, 500);
-		};
-
-		window.addEventListener('resize', debounced_resize);
 	});
-
-	// $: if ($game && dev) console.table($game);
 
 	// let's track if we click and drag so we can draw, this is updated in markup
 	let mouse_down = false;
@@ -55,11 +41,6 @@
 			on:mousedown={() => (mouse_down = true)}
 			on:mouseup={() => (mouse_down = false)}
 		>
-			<!--
-                this seems backwards but this is what it takes to work with css grid
-                i could wrap the columns in a sub div and stack the cells inside but
-                i think leaving it like this will be easier for the browser to render
-            -->
 			{#each { length: $grid.rows } as _, row}
 				{#each { length: $grid.columns } as _, column}
 					<Cell {row} {column} {mouse_down} />
