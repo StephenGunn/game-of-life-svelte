@@ -1,9 +1,5 @@
 <script lang="ts">
+	import Grid from '$lib/game/Grid.svelte';
 </script>
 
-<svelte:head>
-	<title>Conway's Game Of Life in Svelte</title>
-</svelte:head>
-
-<style>
-</style>
+<Grid />

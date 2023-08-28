@@ -1,0 +1,35 @@
+<header>
+	<a href="/"> Conway's Game Of Life in Svelte(Kit) </a>
+	<nav>
+		<a href="/about">Game</a>
+		<a href="/about">About</a>
+		<a
+			href="https://github.com/StephenGunn/game-of-life-svelte"
+			target="_blank"
+			rel="noopener noreferrer">Source</a
+		>
+	</nav>
+</header>
+
+<style>
+	header {
+		padding: 0 1rem;
+		border-bottom: 1px solid var(--accent);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 3rem;
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--secondary);
+	}
+	a:hover {
+		color: var(--primary);
+	}
+	nav {
+		display: flex;
+		gap: 2rem;
+	}
+</style>

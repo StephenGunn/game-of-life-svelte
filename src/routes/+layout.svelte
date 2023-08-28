@@ -1,31 +1,23 @@
 <script lang="ts">
 	import '$styles/vars.css';
 	import '$styles/app.css';
+	import Controls from '$lib/components/Controls.svelte';
+	import Header from '$lib/components/Header.svelte';
 </script>
 
-<header>
-	<a href="/">
-		<div class="title">Conway's Game Of Life</div>
-		<div class="subtitle">In Svelte (kit)</div>
-	</a>
-</header>
-<aside />
-<slot />
+<svelte:head>
+	<title>Conway's Game Of Life in Svelte</title>
+</svelte:head>
+
+<Header />
+<main>
+	<Controls />
+	<slot />
+</main>
 
 <style>
-	header {
-		padding: 0.5rem;
-		border-bottom: 1px solid var(--accent);
-	}
-
-	a {
-		text-decoration: none;
-	}
-
-	.title {
-		font-size: 1.2rem;
-	}
-	.subtitle {
-		color: var(--secondary);
+	main {
+		display: flex;
+		height: calc(100vh - 3rem);
 	}
 </style>
