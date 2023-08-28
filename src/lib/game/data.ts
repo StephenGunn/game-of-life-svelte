@@ -33,14 +33,14 @@ export const generation = writable(0)
 
 // how many cells are currently alive?
 export const currently_alive = derived(
-    [game, grid],
-    ([$game, $grid]) => {
+    game,
+    $game => {
         let alive = 0
         if (!$game || !$game.length) return alive
         // follow the same draw order, row -> column
-        for (let row = 0; row < $grid.rows; row++) {
-            for (let column = 0; column < $grid.columns; column++) {
-                if($game[row][column] === 1) alive++
+        for (let row = 0; row < $game.length; row++) {
+            for (let column = 0; column < $game[row].length; column++) {
+                if ($game[row][column] === 1) alive++
             }
         }
         return alive

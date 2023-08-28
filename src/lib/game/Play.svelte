@@ -121,7 +121,7 @@
 		{/if}
 	</button>
 	<button on:click={next_step} disabled={$is_currently_playing || $currently_alive === 0}>
-		Next Gen.
+		Single Gen.
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
 			><rect width="256" height="256" fill="none" /><polygon
 				points="136 32 232 128 136 224 136 176 72 176 72 80 136 80 136 32"

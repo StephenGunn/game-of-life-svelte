@@ -46,10 +46,6 @@
 			</div>
 		</div>
 		<div class="item">
-			<div class="title">Cell Size</div>
-			<Resize />
-		</div>
-		<div class="item">
 			<div class="title">Generation Speed</div>
 			<Toggle
 				on:switch={() => {
@@ -83,6 +79,10 @@
 		<div class="item">
 			<div class="title">Reset Game</div>
 			<Reset />
+		</div>
+		<div class="item">
+			<div class="title">Cell Size</div>
+			<Resize />
 		</div>
 	</div>
 </aside>

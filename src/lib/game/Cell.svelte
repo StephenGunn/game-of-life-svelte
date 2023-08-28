@@ -53,12 +53,14 @@
 		font-size: 0.5rem;
 		display: grid;
 		place-content: center;
-		color: var(--secondary);
+		color: var(--muted);
+		overflow: hidden;
 	}
 
 	.alive {
 		background: var(--primary);
 		/* border: 1px solid var(--primary); */
-		color: black;
+		color: var(--background);
+		font-weight: bold;
 	}
 </style>
