@@ -1,6 +1,8 @@
 Hasn't this been done before?
 =============================
 
+[Live demo](https://life.jovianmoon.io)
+
 Yes, a ton of times.
 
 I had youtube on in the background the other day and I heard [The Primeagen](https://twitter.com/ThePrimeagen) say something along the lines of "I've never built the game of life... maybe I should do that."

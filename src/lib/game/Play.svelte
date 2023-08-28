@@ -4,9 +4,10 @@
 	import { onDestroy } from 'svelte';
 
 	const count_neighbors = (row: number, column: number) => {
-		// we are using another set of nested loops to count all of our neighbors and subtract the
+		// we are using another set of nested loops to count all of our neighbors
 		// using the modulus op to do the wrap around check... This was hard.
-		// value of the middle cell to not throw off the count.
+		// subtract the value of the original cell (it's not a neighbor to itself)
+		// to not throw off the count.
 		let neighbors_found = 0;
 
 		// 3x3 sub-grid
