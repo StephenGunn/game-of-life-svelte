@@ -8,8 +8,8 @@ export const container = writable({
 })
 
 // cell size in pixels
-export const cell_size = writable(30)
-export const cell_min_size = writable(30)
+export const cell_size = writable(50)
+export const cell_min_size = writable(50)
 
 // derived store calculates our grid
 export const grid = derived(
@@ -29,6 +29,7 @@ export const grid = derived(
 
 // game state in a 2d array, we don't manipulate it here
 export const game: Writable<(0|1)[][]> = writable()
+export const generation = writable(0)
 
 // how many cells are currently alive?
 export const currently_alive = derived(
@@ -44,3 +45,4 @@ export const currently_alive = derived(
         return alive
     }
 )
+

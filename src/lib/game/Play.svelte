@@ -1,17 +1,71 @@
 <script lang="ts">
-	import { grid, game } from './data';
+	import { grid, game, currently_alive, generation } from './data';
+	import { is_currently_playing } from './settings';
 
-	let is_currently_playing = false;
+	const count_neighbors = (x: number, y: number) => {
+		// we are using another set of nested loops to count all of our neighbors and subtract the
+		// using the modulus op to do the wrap around check... This was hard.
+		// value of the middle cell to not throw off the count.
+		let sum = 0;
 
-	const play_toggle = () => {
-		is_currently_playing = !is_currently_playing;
+		// 3x3 sub-grid
+		for (let i = -1; i < 2; i++) {
+			for (let j = -1; j < 2; j++) {
+				// wrap around logic
+				let col = (x + i + $grid.columns) % $grid.columns;
+				let row = (y + j + $grid.rows) % $grid.rows;
+				sum += $game[col][row];
+			}
+		}
+		sum -= $game[x][y];
+		return sum;
 	};
-	const next_step = () => {};
+	const next_step = () => {
+		// if nothing is left, stop the game before we loop through everything.
+		if ($currently_alive === 0) {
+			$is_currently_playing = false;
+		}
+
+		$generation += 1;
+
+		// iterate through our game
+		for (let i = 0; i < $grid.columns; i++) {
+			for (let j = 0; j < $grid.rows; j++) {
+				// let's try and make this a little nicer
+				let state = $game[i][j];
+				const neighbors = count_neighbors(i, j);
+				if (state === 0 && neighbors === 3) {
+					$game[i][j] = 1;
+				} else if (state === 1 && (neighbors < 2 || neighbors > 3)) {
+					$game[i][j] = 0;
+				} else {
+					$game[i][j] = state;
+				}
+			}
+		}
+	};
+
+	let game_loop: ReturnType<typeof setInterval>;
+	const play_toggle = () => {
+		// stop logic
+		if ($is_currently_playing) {
+			$is_currently_playing = false;
+			clearInterval(game_loop);
+			return;
+		}
+
+		// play logic
+		$is_currently_playing = true;
+		next_step();
+		game_loop = setInterval(() => {
+			next_step();
+		}, 100);
+	};
 </script>
 
 <div>
 	<button on:click={play_toggle}>
-		{#if !is_currently_playing}
+		{#if !$is_currently_playing}
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
 				><rect width="256" height="256" fill="none" /><path
 					d="M72,39.88V216.12a8,8,0,0,0,12.15,6.69l144.08-88.12a7.82,7.82,0,0,0,0-13.38L84.15,33.19A8,8,0,0,0,72,39.88Z"
@@ -50,7 +104,7 @@
 			> Pause
 		{/if}
 	</button>
-	<button on:click={next_step} disabled={is_currently_playing}>
+	<button on:click={next_step} disabled={$is_currently_playing}>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
 			><rect width="256" height="256" fill="none" /><polygon
 				points="136 32 232 128 136 224 136 176 72 176 72 80 136 80 136 32"

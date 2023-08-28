@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { show_coords, show_rulers } from '$lib/game/settings';
-	import { grid, currently_alive } from '$lib/game/data';
+	import { grid, currently_alive, generation } from '$lib/game/data';
 	import Play from '$lib/game/Play.svelte';
 	import Randomize from '$lib/game/Randomize.svelte';
 	import Resize from '$lib/game/Resize.svelte';
@@ -14,9 +14,13 @@
 			<Play />
 		</div>
 		<div class="item">
-			<div class="title">Cells</div>
+			<div class="title">Data</div>
 			<div class="spread">
-				<div>total</div>
+				<div>generation</div>
+				<div>{$generation}</div>
+			</div>
+			<div class="spread">
+				<div>cells</div>
 				<div>{$grid.columns * $grid.rows}</div>
 			</div>
 			<div class="spread">
