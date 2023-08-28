@@ -1,7 +1,7 @@
 <header>
 	<a href="/"> Conway's Game Of Life in Svelte(Kit) </a>
 	<nav>
-		<a href="/about">Game</a>
+		<a href="/">Game</a>
 		<a href="/about">About</a>
 		<a
 			href="https://github.com/StephenGunn/game-of-life-svelte"

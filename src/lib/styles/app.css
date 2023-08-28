@@ -120,3 +120,7 @@ aside button svg {
 aside button:hover {
     background: var(--primary)
 }
+
+p {
+    line-height: 1.7;
+}

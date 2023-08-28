@@ -1,38 +1,22 @@
-# create-svelte
+Hasn't this been done before?
+=============================
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Yes, a ton of times.
 
-## Creating a project
+I had youtube on in the background the other day and I heard [The Primeagen](https://twitter.com/ThePrimeagen) say something along the lines of "I've never built the game of life... maybe I should do that."
 
-If you're seeing this, you've probably already done this step. Congrats!
+I said to myself "Hey! I've been wanting to do that too!"
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+So I did.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+A few of my goals:
+------------------
 
-## Developing
+*   No dependencies past the SvelteKit skeleton project selections (typescript + prettier)
+*   Utilize Svelte's features (components, derived stores, etc)
+*   Make it interactive (you can draw on the game board to change the state live!)
+*   A fluid game board / clean responsive design
+*   Has to run well enough
+*   No type-os on this page (it's late)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+If you like my effort, give me a star on [GitHub](https://github.com/StephenGunn/game-of-life-svelte) :)
