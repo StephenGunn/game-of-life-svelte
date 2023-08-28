@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { grid, game, currently_alive, generation } from './data';
 	import { is_currently_playing, is_fast } from './settings';
+	import { onDestroy } from 'svelte';
 
 	const count_neighbors = (row: number, column: number) => {
 		// we are using another set of nested loops to count all of our neighbors and subtract the
@@ -77,6 +78,12 @@
 			$is_fast ? 100 : 500
 		);
 	};
+
+	// stop the game if we navigate away
+	onDestroy(() => {
+		$is_currently_playing = false;
+		clearInterval(game_loop);
+	});
 </script>
 
 <div class="buttons">
