@@ -10,8 +10,8 @@
 		// we are drawing this with css grid
 		// draw order: rows, then columns
 		let array = new Array($grid.rows);
-		for (let column = 0; column < $grid.columns; column++) {
-			array[column] = new Array($grid.columns);
+		for (let row = 0; row < $grid.rows; row++) {
+			array[row] = new Array($grid.columns);
 		}
 
 		// set store with initialized game state
@@ -49,7 +49,7 @@
 			{/each}
 		</div>
 	{:else}
-		<div class="loading">Generating game board...</div>
+		<div class="loading">Generating...</div>
 	{/if}
 	{#if $show_rulers}
 		<Rulers />
