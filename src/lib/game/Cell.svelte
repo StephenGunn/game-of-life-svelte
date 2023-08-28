@@ -36,7 +36,8 @@
 	class:alive
 	style:width="{$cell_size}px"
 	style:height="{$cell_size}px"
-	on:mouseenter={handle_mouseenter}
+	on:mouseover={handle_mouseenter}
+	on:focus={handle_toggle}
 	on:mousedown={handle_toggle}
 >
 	{#if $show_coords}
