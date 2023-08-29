@@ -10,7 +10,7 @@
 		controls_width,
 		header_height
 	} from '$lib/game/data';
-	import { is_draw, show_rulers, is_currently_playing } from './settings';
+	import { show_rulers, is_currently_playing } from './settings';
 	import { onMount } from 'svelte';
 	import Cell from './Cell.svelte';
 	import Rulers from './Rulers.svelte';

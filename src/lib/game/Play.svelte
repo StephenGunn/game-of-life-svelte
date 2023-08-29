@@ -98,6 +98,23 @@
 	};
 	$: change_speed(speed_range[$speed]);
 
+	// Some keyboard bindings
+	const on_key_down = (event: KeyboardEvent) => {
+		// don't want repeats
+		if (event.repeat) return;
+
+		// In the switch-case we're updating our boolean flags whenever the
+		// desired bound keys are pressed.
+		switch (event.code) {
+			case 'Space':
+				play_toggle();
+				break;
+			case 'ArrowRight':
+				next_step();
+				break;
+		}
+	};
+
 	// stop the game if we navigate away
 	onDestroy(() => {
 		$is_currently_playing = false;
@@ -105,6 +122,7 @@
 	});
 </script>
 
+<svelte:window on:keydown|preventDefault={on_key_down} />
 <div class="buttons">
 	<button on:click={play_toggle} disabled={$currently_alive === 0}>
 		{#if !$is_currently_playing}
