@@ -49,3 +49,11 @@ export const currently_alive = derived(
     }
 )
 
+export const controls_width = writable(300)
+export const header_height = writable(50)
+export const mouse_position = writable({
+    x: 0,
+    y: 0
+})
+
+export const draw_this_data: Writable<number[][]> = writable([])

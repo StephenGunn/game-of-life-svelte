@@ -4,7 +4,6 @@
 
 	export let row: number = 0;
 	export let column: number = 0;
-	export let mouse_down: boolean = false;
 
 	// I use a <button> here to make ARIA happy
 	// what do we say to the god of accessiblity warnings? "yes ma'am"
@@ -25,19 +24,13 @@
 			$game[row][column] = $game[row][column] === 0 ? 1 : 0;
 		}
 	};
-
-	const handle_mouseenter = () => {
-		if (!mouse_down || !available) return;
-		$game[row][column] = $is_draw ? 1 : 0;
-	};
 </script>
 
 <button
 	class:alive
 	style:width="{$cell_size}px"
 	style:height="{$cell_size}px"
-	on:mouseenter={handle_mouseenter}
-	on:mousedown={handle_toggle}
+	on:click={handle_toggle}
 >
 	{#if $show_coords}
 		{column}, {row}
@@ -60,5 +53,9 @@
 		/* border: 1px solid var(--primary); */
 		color: var(--background);
 		font-weight: bold;
+	}
+
+	button:hover {
+		background: var(--muted);
 	}
 </style>

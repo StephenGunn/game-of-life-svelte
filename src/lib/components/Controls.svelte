@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { show_rulers } from '$lib/game/settings';
-	import { grid, currently_alive, generation } from '$lib/game/data';
+	import { grid, currently_alive, generation, controls_width } from '$lib/game/data';
 	import Play from '$lib/game/Play.svelte';
 	import Randomize from '$lib/game/Randomize.svelte';
 	import Resize from '$lib/game/Resize.svelte';
@@ -9,7 +9,7 @@
 	import Speed from '$lib/game/Speed.svelte';
 </script>
 
-<aside>
+<aside bind:offsetWidth={$controls_width}>
 	<div class="controls">
 		<div class="item">
 			<Play />
@@ -58,7 +58,8 @@
 
 <style>
 	aside {
-		width: 350px;
+		width: 300px;
+		min-width: 300px;
 		border-right: 1px solid var(--accent);
 		overflow-y: auto;
 	}

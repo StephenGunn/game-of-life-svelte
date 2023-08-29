@@ -41,6 +41,6 @@
 <style>
 	main {
 		display: flex;
-		height: calc(100vh - 3rem);
+		height: calc(100vh - 50px);
 	}
 </style>

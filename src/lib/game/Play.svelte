@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { grid, game, currently_alive, generation } from './data';
+	import { grid, game, currently_alive, generation, draw_this_data } from './data';
 	import { is_currently_playing, speed, speed_range } from './settings';
 	import { onDestroy } from 'svelte';
 
@@ -55,6 +55,16 @@
 					next_generation[row][column] = state;
 				}
 			}
+		}
+
+		// check if there is draw data to work into the next frame
+		if ($draw_this_data.length) {
+			for (let cell = 0; cell < $draw_this_data.length; cell++) {
+				next_generation[$draw_this_data[cell][0]][$draw_this_data[cell][1]] = 1;
+			}
+
+			// clear out the store
+			$draw_this_data = [];
 		}
 
 		// overwrite our game state with our next step.

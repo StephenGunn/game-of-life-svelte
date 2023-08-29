@@ -1,4 +1,8 @@
-<header>
+<script lang="ts">
+	import { header_height } from '$lib/game/data';
+</script>
+
+<header bind:offsetHeight={$header_height}>
 	<a href="/"> Conway's Game Of Life in Svelte(Kit) </a>
 	<nav>
 		<a href="/">Game</a>
@@ -18,7 +22,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 3rem;
+		height: 50px;
 	}
 
 	a {
