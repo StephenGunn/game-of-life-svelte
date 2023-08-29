@@ -79,8 +79,8 @@
 		draw_buffer = draw_buffer;
 	};
 
-	// glider that flies south west
-	const glider_sw = [
+	// glider that flies south east
+	const glider_se = [
 		[1, 0, 0],
 		[0, 1, 1],
 		[1, 1, 0]
@@ -95,7 +95,7 @@
 				let target_column = (column + relative_column + $grid.columns) % $grid.columns;
 
 				// one shot?
-				if (glider_sw[relative_row][relative_column]) draw_buffer.push([target_row, target_column]);
+				if (glider_se[relative_row][relative_column]) draw_buffer.push([target_row, target_column]);
 			}
 		}
 	};
