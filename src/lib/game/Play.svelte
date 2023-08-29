@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { grid, game, currently_alive, generation, draw_this_data } from './data';
+	import { grid, game, currently_alive, generation, draw_this_data, game_loaded } from './data';
 	import { is_currently_playing, speed, speed_range } from './settings';
 	import { onDestroy } from 'svelte';
 
@@ -118,6 +118,7 @@
 	// stop the game if we navigate away
 	onDestroy(() => {
 		$is_currently_playing = false;
+		$game_loaded = false;
 		clearInterval(game_loop);
 	});
 </script>

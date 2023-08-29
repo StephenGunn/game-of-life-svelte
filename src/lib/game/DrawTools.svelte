@@ -72,7 +72,7 @@
 				stroke-linejoin="round"
 				stroke-width="16"
 			/></svg
-		> Free Draw
+		> Draw
 	</button>
 	<button class:active={$draw_mode === 'glider'} on:click={() => ($draw_mode = 'glider')}>
 		<svg
@@ -138,5 +138,7 @@
 
 	svg {
 		transition: transform 200ms ease;
+		width: 1.1rem;
+		height: 1.1rem;
 	}
 </style>

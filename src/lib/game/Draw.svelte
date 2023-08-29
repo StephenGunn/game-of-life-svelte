@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { gliders } from './shapes';
 	import {
 		grid,
 		cell_size,
@@ -61,7 +60,10 @@
 				let target_column = (column + relative_column + $grid.columns) % $grid.columns;
 
 				// one shot?
-				if (shape[relative_row][relative_column]) draw_buffer.push([target_row, target_column]);
+				if (shape[relative_row][relative_column] && !is_in_draw_buffer([target_row, target_column]))
+					draw_buffer.push([target_row, target_column]);
+
+				draw_buffer = draw_buffer;
 			}
 		}
 	};
@@ -81,12 +83,13 @@
 		}
 	}
 
+	// top left of the shape preview container
 	let preview_coords = {
 		row: 0,
 		column: 0
 	};
 
-	// draw shape preview logic
+	// only calculate the shape preview coords if we need to
 	$: if ($draw_mode !== 'free' && mouse_over_grid) {
 		let x = Math.floor($mouse_position.x - $controls_width - $grid.orphaned_w / 2);
 		let y = Math.floor($mouse_position.y - $header_height - $grid.orphaned_h / 2);
@@ -98,7 +101,7 @@
 	}
 </script>
 
-{#if draw_buffer.length && $draw_mode === 'free'}
+{#if draw_buffer.length}
 	{#each draw_buffer as cell}
 		<div
 			class="buffer_cell"
