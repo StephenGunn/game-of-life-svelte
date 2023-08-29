@@ -19,7 +19,6 @@ A few of my goals:
 *   Make it interactive (you can draw on the game board to change the state live!)
 *   A fluid game board / clean responsive design
 *   Has to run well enough
-*   No type-os on this page (it's late)
 *   Didn't want to use canvas or any rendering libraries
 
 If you like my effort, give me a star :)
