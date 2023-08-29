@@ -62,11 +62,6 @@
 		draw_buffer = [];
 	};
 
-	let draw_position = {
-		row: 0,
-		column: 0
-	};
-
 	// use this to only draw on blank cells
 	const is_in_draw_buffer = (target: number[]): boolean => {
 		return draw_buffer.some(
@@ -95,12 +90,6 @@
 		draw(temp_row, temp_column);
 	}
 </script>
-
-{#if $game_loaded}
-	<div class="debug">
-		{draw_position.row}, {draw_position.column}
-	</div>
-{/if}
 
 <div class="container" bind:offsetWidth={$container.w} bind:offsetHeight={$container.h}>
 	{#if $game_loaded}
@@ -168,14 +157,5 @@
 		display: grid;
 		place-content: center;
 		font-size: 2rem;
-	}
-
-	.debug {
-		position: absolute;
-		top: 40%;
-		right: 1rem;
-		background: white;
-		padding: 1rem;
-		z-index: 2;
 	}
 </style>
