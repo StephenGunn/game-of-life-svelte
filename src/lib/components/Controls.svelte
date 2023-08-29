@@ -7,6 +7,7 @@
 	import Toggle from './Toggle.svelte';
 	import Reset from '$lib/game/Reset.svelte';
 	import Speed from '$lib/game/Speed.svelte';
+	import DrawModes from '$lib/game/DrawModes.svelte';
 </script>
 
 <aside bind:offsetWidth={$controls_width}>
@@ -37,9 +38,10 @@
 			<div class="title">Speed</div>
 			<Speed />
 		</div>
+
 		<div class="item">
-			<div class="title">Show Rulers</div>
-			<Toggle on:switch={() => ($show_rulers = !$show_rulers)} value={$show_rulers} />
+			<div class="title">Draw Mode</div>
+			<DrawModes />
 		</div>
 		<div class="item">
 			<div class="title">Randomize</div>
@@ -52,6 +54,10 @@
 		<div class="item">
 			<div class="title">Cell Size</div>
 			<Resize />
+		</div>
+		<div class="item">
+			<div class="title">Show Rulers</div>
+			<Toggle on:switch={() => ($show_rulers = !$show_rulers)} value={$show_rulers} />
 		</div>
 	</div>
 </aside>

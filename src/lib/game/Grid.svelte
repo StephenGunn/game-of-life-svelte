@@ -10,7 +10,7 @@
 		controls_width,
 		header_height
 	} from '$lib/game/data';
-	import { show_rulers, is_currently_playing } from './settings';
+	import { show_rulers, is_currently_playing, draw_mode } from './settings';
 	import { onMount } from 'svelte';
 	import Cell from './Cell.svelte';
 	import Rulers from './Rulers.svelte';
@@ -54,7 +54,7 @@
 		if ($is_currently_playing) {
 			$draw_this_data = draw_buffer;
 		} else {
-			// if we are stopped, give birth to the draw buffer cells
+			// if we are stopped, instantly give birth to the draw buffer cells
 			for (let cell = 0; cell < draw_buffer.length; cell++) {
 				$game[draw_buffer[cell][0]][draw_buffer[cell][1]] = 1;
 			}
@@ -70,13 +70,34 @@
 		);
 	};
 
-	const draw = (row: number, column: number) => {
+	const free_draw = (row: number, column: number) => {
 		// check if the cell already exists in the draw buffer
 		if (is_in_draw_buffer([row, column])) return;
 
 		// if it doesnt, add it
 		draw_buffer.push([row, column]);
 		draw_buffer = draw_buffer;
+	};
+
+	// glider that flies south west
+	const glider_sw = [
+		[1, 0, 0],
+		[0, 1, 1],
+		[1, 1, 0]
+	];
+
+	const draw_glider = (row: number, column: number) => {
+		// 3x3 sub-grid
+		for (let relative_row = 0; relative_row < 3; relative_row++) {
+			for (let relative_column = 0; relative_column < 3; relative_column++) {
+				// wrap around logic
+				let target_row = (row + relative_row + $grid.rows) % $grid.rows;
+				let target_column = (column + relative_column + $grid.columns) % $grid.columns;
+
+				// one shot?
+				if (glider_sw[relative_row][relative_column]) draw_buffer.push([target_row, target_column]);
+			}
+		}
 	};
 
 	// update draw position object only when mouse is down and game is loaded
@@ -87,7 +108,12 @@
 		let temp_row = Math.floor(Math.floor(y > 0 ? y : 0) / $cell_size);
 		let temp_column = Math.floor(Math.floor(x > 0 ? x : 0) / $cell_size);
 
-		draw(temp_row, temp_column);
+		if ($draw_mode === 'free') {
+			free_draw(temp_row, temp_column);
+		}
+		if ($draw_mode === 'glider') {
+			draw_glider(temp_row, temp_column);
+		}
 	}
 </script>
 
