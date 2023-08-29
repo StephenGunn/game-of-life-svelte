@@ -1,20 +1,18 @@
 <script lang="ts">
-	import { show_coords, show_rulers, is_fast, is_currently_playing } from '$lib/game/settings';
+	import { show_rulers } from '$lib/game/settings';
 	import { grid, currently_alive, generation } from '$lib/game/data';
 	import Play from '$lib/game/Play.svelte';
 	import Randomize from '$lib/game/Randomize.svelte';
 	import Resize from '$lib/game/Resize.svelte';
 	import Toggle from './Toggle.svelte';
-	import type { SvelteComponent } from 'svelte';
 	import Reset from '$lib/game/Reset.svelte';
-
-	let player: SvelteComponent;
+	import Speed from '$lib/game/Speed.svelte';
 </script>
 
 <aside>
 	<div class="controls">
 		<div class="item">
-			<Play bind:this={player} />
+			<Play />
 		</div>
 		<div class="item">
 			<div class="spread">
@@ -34,43 +32,14 @@
 				<div>{$grid.columns * $grid.rows - $currently_alive}</div>
 			</div>
 		</div>
-		<div class="item">
-			<div class="title">Grid</div>
-			<div class="spread">
-				<div>columns</div>
-				<div>{$grid.columns}</div>
-			</div>
-			<div class="spread">
-				<div>rows</div>
-				<div>{$grid.rows}</div>
-			</div>
-		</div>
-		<div class="item">
-			<div class="title">Generation Speed</div>
-			<Toggle
-				on:switch={() => {
-					$is_fast = !$is_fast;
-					if ($is_currently_playing) {
-						// start and stop to reset the interval
-						player.play_toggle();
-						player.play_toggle();
-					}
-				}}
-				value={$is_fast}
-			>
-				<svelte:fragment slot="true">Fast</svelte:fragment>
-				<svelte:fragment slot="false">Slow</svelte:fragment>
-			</Toggle>
-		</div>
 
+		<div class="item">
+			<div class="title">Speed</div>
+			<Speed />
+		</div>
 		<div class="item">
 			<div class="title">Show Rulers</div>
 			<Toggle on:switch={() => ($show_rulers = !$show_rulers)} value={$show_rulers} />
-		</div>
-
-		<div class="item">
-			<div class="title">Show Coords</div>
-			<Toggle on:switch={() => ($show_coords = !$show_coords)} value={$show_coords} />
 		</div>
 		<div class="item">
 			<div class="title">Randomize</div>

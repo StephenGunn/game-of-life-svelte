@@ -23,3 +23,7 @@ A few of my goals:
 *   Didn't want to use canvas or any rendering libraries
 
 If you like my effort, give me a star :)
+
+Bug Fixes & Thanks
+------------------
+*    [gereleth - bug fixes](https://github.com/gereleth)

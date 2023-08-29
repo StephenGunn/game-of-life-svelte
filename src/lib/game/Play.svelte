@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { grid, game, currently_alive, generation } from './data';
-	import { is_currently_playing, is_fast } from './settings';
+	import { is_currently_playing, speed, speed_range } from './settings';
 	import { onDestroy } from 'svelte';
 
 	const count_neighbors = (row: number, column: number) => {
@@ -61,7 +61,7 @@
 		$game = next_generation;
 	};
 
-	export const play_toggle = () => {
+	const play_toggle = () => {
 		// stop logic
 		if ($is_currently_playing) {
 			$is_currently_playing = false;
@@ -72,13 +72,21 @@
 		// play logic
 		$is_currently_playing = true;
 		next_step();
-		game_loop = setInterval(
-			() => {
-				next_step();
-			},
-			$is_fast ? 100 : 500
-		);
+		game_loop = setInterval(() => {
+			next_step();
+		}, speed_range[$speed]);
 	};
+
+	// watch for speed changes in our settings store and apply them if the game is playing
+	const change_speed = (speed: number) => {
+		// escape if the game isn't playing
+		if (!$is_currently_playing) return;
+		clearInterval(game_loop);
+		game_loop = setInterval(() => {
+			next_step();
+		}, speed);
+	};
+	$: change_speed(speed_range[$speed]);
 
 	// stop the game if we navigate away
 	onDestroy(() => {
