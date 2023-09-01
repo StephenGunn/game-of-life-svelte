@@ -43,4 +43,10 @@
 		display: flex;
 		height: calc(100vh - 50px);
 	}
+
+	@media (max-width: 768px) {
+		main {
+			height: calc(100vh - 65px);
+		}
+	}
 </style>
