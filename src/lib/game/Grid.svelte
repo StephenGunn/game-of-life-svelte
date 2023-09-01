@@ -53,8 +53,6 @@
 	const handle_touch = (event: TouchEvent) => {
 		let touch = event.touches[0];
 
-		console.log(touch);
-
 		mouse_over_grid = true;
 		let raw_x = touch.clientX;
 		let raw_y = touch.clientY;
@@ -69,8 +67,6 @@
 		temp_row = temp_row < $grid.rows ? temp_row : $grid.rows - 1;
 		temp_column = temp_column < $grid.columns ? temp_column : $grid.columns - 1;
 
-		console.log(temp_row, temp_column);
-
 		if ($draw_mode === 'free') {
 			draw_functions.free_draw(temp_row, temp_column);
 		} else {
@@ -78,9 +74,8 @@
 		}
 	};
 
+	// this gives me access to Draw.svelte's functions
 	let draw_functions: SvelteComponent;
-
-	$: console.log($window_width);
 </script>
 
 <svelte:window bind:outerWidth={$window_width} />

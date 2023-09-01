@@ -17,8 +17,6 @@
 	export const handle_mouse_up = () => {
 		// if the game is currently in action, send the data to our play function to be loaded
 		// into the next frame and don't try and draw it one cell at a time
-
-		console.table(draw_buffer);
 		if ($is_currently_playing) {
 			$draw_this_data = draw_buffer;
 		} else {
