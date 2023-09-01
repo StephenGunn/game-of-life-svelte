@@ -1,6 +1,16 @@
 <script lang="ts">
-	import { container, grid, cell_size, game, game_loaded, mouse_position } from '$lib/game/data';
-	import { show_rulers } from './settings';
+	import {
+		container,
+		grid,
+		cell_size,
+		game,
+		game_loaded,
+		mouse_position,
+		window_width
+	} from '$lib/game/data';
+	import { shape_direction, active_shape_group } from './shapes';
+
+	import { show_rulers, controls_width, header_height, draw_mode } from './settings';
 	import { SvelteComponent, onMount } from 'svelte';
 	import Cell from './Cell.svelte';
 	import Rulers from './Rulers.svelte';
@@ -35,13 +45,45 @@
 	// send our raw mouse data to our store (will be processed in derived store)
 	const handle_mouse_over = (event: MouseEvent) => {
 		mouse_over_grid = true;
-		$mouse_position.x = event.clientX;
 		$mouse_position.y = event.clientY;
+		$mouse_position.x = event.clientX;
+	};
+
+	// right now i have to handle touch events in this file, can i handle it somewhere else?
+	const handle_touch = (event: TouchEvent) => {
+		let touch = event.touches[0];
+
+		console.log(touch);
+
+		mouse_over_grid = true;
+		let raw_x = touch.clientX;
+		let raw_y = touch.clientY;
+
+		let x = Math.floor(raw_x - $grid.orphaned_w / 2);
+		let y = Math.floor(raw_y - $grid.orphaned_h / 2);
+
+		let temp_row = Math.floor(Math.floor(y > 0 ? y : 0) / $cell_size);
+		let temp_column = Math.floor(Math.floor(x > 0 ? x : 0) / $cell_size);
+
+		// logic to prevent drawing outside of our grid and crashing our game
+		temp_row = temp_row < $grid.rows ? temp_row : $grid.rows - 1;
+		temp_column = temp_column < $grid.columns ? temp_column : $grid.columns - 1;
+
+		console.log(temp_row, temp_column);
+
+		if ($draw_mode === 'free') {
+			draw_functions.free_draw(temp_row, temp_column);
+		} else {
+			draw_functions.draw_shape(temp_row, temp_column, $active_shape_group[$shape_direction]);
+		}
 	};
 
 	let draw_functions: SvelteComponent;
+
+	$: console.log($window_width);
 </script>
 
+<svelte:window bind:outerWidth={$window_width} />
 <div class="container" bind:offsetWidth={$container.w} bind:offsetHeight={$container.h}>
 	{#if $game_loaded}
 		<!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -62,6 +104,9 @@
 			on:mouseleave={() => {
 				mouse_over_grid = false;
 			}}
+			on:touchstart|preventDefault={handle_touch}
+			on:touchmove|preventDefault={handle_touch}
+			on:touchend|preventDefault={() => draw_functions.handle_mouse_up()}
 		>
 			{#each { length: $grid.rows } as _, row}
 				{#each { length: $grid.columns } as _, column}
@@ -99,5 +144,11 @@
 		display: grid;
 		place-content: center;
 		font-size: 2rem;
+	}
+
+	@media (max-width: 768px) {
+		.loading {
+			font-size: 1rem;
+		}
 	}
 </style>

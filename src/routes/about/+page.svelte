@@ -1,3 +1,11 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { mobile_menu_active } from '$lib/game/settings';
+	onMount(() => {
+		$mobile_menu_active = true;
+	});
+</script>
+
 <article>
 	<h1>Hasn't this been done before?</h1>
 	<div>
@@ -69,5 +77,15 @@
 	}
 	ul li {
 		padding: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		article {
+			position: fixed;
+			width: 100vw;
+			height: 100vh;
+			overflow-y: auto;
+			padding: 5rem 1rem 2rem 1rem;
+		}
 	}
 </style>

@@ -5,11 +5,9 @@
 		game,
 		game_loaded,
 		mouse_position,
-		draw_this_data,
-		controls_width,
-		header_height
+		draw_this_data
 	} from '$lib/game/data';
-	import { is_currently_playing, draw_mode } from './settings';
+	import { is_currently_playing, draw_mode, controls_width, header_height } from './settings';
 	import { shape_direction, active_shape_group } from './shapes';
 
 	export let mouse_over_grid = false;
@@ -19,6 +17,8 @@
 	export const handle_mouse_up = () => {
 		// if the game is currently in action, send the data to our play function to be loaded
 		// into the next frame and don't try and draw it one cell at a time
+
+		console.table(draw_buffer);
 		if ($is_currently_playing) {
 			$draw_this_data = draw_buffer;
 		} else {
@@ -38,7 +38,7 @@
 		);
 	};
 
-	const free_draw = (row: number, column: number) => {
+	export const free_draw = (row: number, column: number) => {
 		// check if the cell already exists in the draw buffer
 		if (is_in_draw_buffer([row, column])) return;
 
@@ -48,7 +48,7 @@
 	};
 
 	// general purpose draw function
-	const draw_shape = (row: number, column: number, shape: (0 | 1)[][]) => {
+	export const draw_shape = (row: number, column: number, shape: (0 | 1)[][]) => {
 		for (let relative_row = 0; relative_row < shape.length; relative_row++) {
 			for (
 				let relative_column = 0;
@@ -60,8 +60,12 @@
 				let target_column = (column + relative_column + $grid.columns) % $grid.columns;
 
 				// one shot?
-				if (shape[relative_row][relative_column] && !is_in_draw_buffer([target_row, target_column]))
+				if (
+					shape[relative_row][relative_column] &&
+					!is_in_draw_buffer([target_row, target_column])
+				) {
 					draw_buffer.push([target_row, target_column]);
+				}
 
 				draw_buffer = draw_buffer;
 			}
@@ -146,5 +150,11 @@
 
 	.shape_preview {
 		position: absolute;
+	}
+
+	@media (max-width: 768px) {
+		.shape_preview {
+			display: none;
+		}
 	}
 </style>

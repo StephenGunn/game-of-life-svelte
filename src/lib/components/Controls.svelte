@@ -1,6 +1,11 @@
 <script lang="ts">
-	import { show_rulers, is_currently_playing } from '$lib/game/settings';
-	import { grid, currently_alive, generation, controls_width } from '$lib/game/data';
+	import {
+		show_rulers,
+		is_currently_playing,
+		controls_width,
+		mobile_menu_active
+	} from '$lib/game/settings';
+	import { grid, currently_alive, generation } from '$lib/game/data';
 	import Play from '$lib/game/Play.svelte';
 	import Randomize from '$lib/game/Randomize.svelte';
 	import Resize from '$lib/game/Resize.svelte';
@@ -10,9 +15,9 @@
 	import DrawTools from '$lib/game/DrawTools.svelte';
 </script>
 
-<aside bind:offsetWidth={$controls_width}>
+<aside bind:offsetWidth={$controls_width} class:mobile_menu_active={$mobile_menu_active}>
 	<div class="controls">
-		<div class="item">
+		<div class="item play">
 			<Play />
 		</div>
 		<div class="item">
@@ -59,7 +64,7 @@
 			<div class="title">Show Rulers</div>
 			<Toggle on:switch={() => ($show_rulers = !$show_rulers)} value={$show_rulers} />
 		</div>
-		<div class="item">
+		<div class="item hide_mobile">
 			<div class="title">Keyboard Controls</div>
 			<div class="key">
 				<kbd>space</kbd>
@@ -130,5 +135,37 @@
 		min-width: 1.5rem;
 		text-align: center;
 		color: var(--secondary);
+	}
+
+	@media (max-width: 768px) {
+		aside {
+			position: absolute;
+			top: 100%;
+			/* border-top: 1px solid var(--accent); */
+			width: 100%;
+			border-right: none;
+			background: var(--background);
+			z-index: 2;
+			padding-bottom: 5rem;
+		}
+		aside.mobile_menu_active {
+			top: 50px;
+			height: calc(100% - 50px);
+		}
+
+		.hide_mobile {
+			display: none;
+		}
+
+		.play {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			background: var(--background);
+			border-top: 1px solid var(--accent);
+			padding: 1rem 5rem 1rem 1rem;
+			width: 100%;
+			z-index: 10;
+		}
 	}
 </style>
