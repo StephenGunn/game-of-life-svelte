@@ -28,7 +28,7 @@ export const grid = derived(
         // two are subtracted from total columns for desktop, one for mobile
         columns: Math.floor($container.w / $cell_size) - ($container.w > 768 ? 2 : 1),
         // one is subtracted from total rows for desktop, three for mobile
-        rows: Math.floor($container.h / $cell_size) - ($container.w > 768 ? 1 : 3),
+        rows: Math.floor($container.h / $cell_size) - ($container.w > 768 ? 1 : 4),
         pixel_w: Math.floor($container.w / $cell_size) * $cell_size,
         pixel_h: Math.floor($container.h / $cell_size) * $cell_size,
         // cell manipulations are repeated here to help with positioning of the grid
