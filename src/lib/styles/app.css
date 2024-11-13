@@ -1,7 +1,7 @@
 *,
 *:before,
 *:after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
@@ -55,15 +55,15 @@ header,
 nav,
 section,
 video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    text-size-adjust: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
 }
 
 footer,
@@ -71,54 +71,54 @@ header,
 nav,
 section,
 main {
-    display: block;
+  display: block;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'IBM Plex Mono', monospace;
-    background: var(--background);
-    color: var(--primary);
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Mono", monospace;
+  background: var(--background);
+  color: var(--primary);
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
 }
 
 a {
-    color: var(--primary)
+  color: var(--primary);
 }
 
 aside button {
-    padding: .5rem .75rem;
-    border: none;
-    background: var(--secondary);
-    color: white;
-    font-weight: bold;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 2rem;
-    gap: .5rem;
-    border-radius: .5rem;
-    font-size: .8rem;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: var(--secondary);
+  color: white;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
 }
 
 aside button svg {
-    width: .75rem;
-    height: .75rem;
+  width: 0.75rem;
+  height: 0.75rem;
 }
 
 aside button:hover {
-    background: var(--primary)
+  background: var(--primary);
 }
 
 p {
-    line-height: 1.7;
+  line-height: 1.7;
 }

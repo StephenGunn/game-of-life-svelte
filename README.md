@@ -1,5 +1,4 @@
-Hasn't this been done before?
-=============================
+# Hasn't this been done before?
 
 [Live demo](https://life.jovianmoon.io)
 
@@ -11,18 +10,17 @@ I said to myself "Hey! I've been wanting to do that too!"
 
 So I did.
 
-A few of my goals:
-------------------
+## A few of my goals:
 
-*   No dependencies past the SvelteKit skeleton project selections (typescript + prettier)
-*   Utilize Svelte's features (components, derived stores, etc)
-*   Make it interactive (you can draw on the game board to change the state live!)
-*   A fluid game board / clean responsive design
-*   Has to run well enough
-*   Didn't want to use `<canvas>` or any rendering libraries
+- No dependencies past the SvelteKit skeleton project selections (typescript + prettier)
+- Utilize Svelte's features (components, derived stores, etc)
+- Make it interactive (you can draw on the game board to change the state live!)
+- A fluid game board / clean responsive design
+- Has to run well enough
+- Didn't want to use `<canvas>` or any rendering libraries
 
 If you like my effort, give me a star :)
 
-Bug Fixes & Thanks
-------------------
-*    [gereleth - bug fixes](https://github.com/gereleth)
+## Bug Fixes & Thanks
+
+- [gereleth - bug fixes](https://github.com/gereleth)
