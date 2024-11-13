@@ -3,7 +3,7 @@
 </script>
 
 <header bind:offsetHeight={$header_height} class:show_on_mobile={$mobile_menu_active}>
-  <a href="/"> Conway's Game Of Life in Svelte(Kit) </a>
+  <a href="/"> Conway's Game Of Life in Svelte 4 </a>
   <nav>
     <a href="/" class="hide_mobile">Game</a>
     <a href="/about">About</a>
@@ -81,6 +81,7 @@
     justify-content: space-between;
     height: 50px;
     width: 100%;
+    font-weight: bold;
   }
 
   a {
