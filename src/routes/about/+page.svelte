@@ -62,6 +62,8 @@
     max-width: 800px;
     width: 100%;
     margin: 0 auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 50px);
   }
 
   article > div {
