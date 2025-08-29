@@ -1,0 +1,13 @@
+services:
+  app:
+    image: ${COOLIFY_IMAGE}:${SOURCE_COMMIT:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+    restart: unless-stopped
